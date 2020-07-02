@@ -1,0 +1,10 @@
+D:\ConverterWF\CONVERTER-WIN_FORMS\ConverterWF\rrrr\bin\Debug\rrrr.exe.config
+D:\ConverterWF\CONVERTER-WIN_FORMS\ConverterWF\rrrr\bin\Debug\rrrr.exe
+D:\ConverterWF\CONVERTER-WIN_FORMS\ConverterWF\rrrr\bin\Debug\rrrr.pdb
+D:\ConverterWF\CONVERTER-WIN_FORMS\ConverterWF\rrrr\obj\Debug\Conveter_WF.csprojAssemblyReference.cache
+D:\ConverterWF\CONVERTER-WIN_FORMS\ConverterWF\rrrr\obj\Debug\Converter_WF.Form1.resources
+D:\ConverterWF\CONVERTER-WIN_FORMS\ConverterWF\rrrr\obj\Debug\rrrr.Properties.Resources.resources
+D:\ConverterWF\CONVERTER-WIN_FORMS\ConverterWF\rrrr\obj\Debug\Conveter_WF.csproj.GenerateResource.cache
+D:\ConverterWF\CONVERTER-WIN_FORMS\ConverterWF\rrrr\obj\Debug\Conveter_WF.csproj.CoreCompileInputs.cache
+D:\ConverterWF\CONVERTER-WIN_FORMS\ConverterWF\rrrr\obj\Debug\rrrr.exe
+D:\ConverterWF\CONVERTER-WIN_FORMS\ConverterWF\rrrr\obj\Debug\rrrr.pdb
