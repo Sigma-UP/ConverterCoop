@@ -36,11 +36,11 @@ namespace Converter_WF
 			cbFrom.Items.AddRange(arr);
 
 			
-			dgv.Columns.Add("crrName", "CURRENCY");
+			dgv.Columns.Add("currencyName", "CURRENCY");
 			dgv.Columns[0].ReadOnly = true;
 
 			dgv.Columns.Add("rare", "RARE");
-			dgv.Columns[0].ReadOnly = false;
+			dgv.Columns[1].ReadOnly = false;
 
 			dgv.Columns.Add("result", "RESULT");
 			dgv.Columns[2].ReadOnly = true;
@@ -67,18 +67,20 @@ namespace Converter_WF
 
 			for (int i = 0; i < currencies.Count() - 1; i++)
 			{
-				dgv.Rows[i].Cells[0].Value = currencies[i];
-				dgv.Rows[i].Cells[1].Value = "1,0000";
+				dgv.Rows[i].Cells["currencyName"].Value = currencies[i];
+				dgv.Rows[i].Cells["rare"].Value = "1,0000";
+				dgv.Rows[i].Cells["result"].Value = "1,0000";
 			}
 
 			swap_last(currencies, chsnIndex);
 		}
 		private void tbx_KeyPress(object sender, KeyPressEventArgs e) {positive_num_check(e); }
+		private void dgv_KeyPress(object sender, KeyPressEventArgs e) {positive_num_check(e); }
 		
 		private void btn_convert_click(object sender, EventArgs e)
 		{
 			for (int i = 0; i < dgv.RowCount; i++)
-				dgv.Rows[i].Cells["RESULT"].Value =
+				dgv.Rows[i].Cells["result"].Value =
 					(Convert.ToDouble(tbx_currVal.Text) * Convert.ToDouble(dgv.Rows[i].Cells["RARE"].Value)).ToString("0.0000");
 		}
 
@@ -89,6 +91,7 @@ namespace Converter_WF
 			list[swap_index] = tmp;
 		}
 
+	
 		private KeyPressEventArgs positive_num_check(KeyPressEventArgs e)
 		{
 			char key = e.KeyChar;
@@ -104,5 +107,27 @@ namespace Converter_WF
 			form.ShowDialog();
 			form.Stop();
         }
-    }
+
+		private void dgv_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+		{
+			double value;
+			double DEFAULT = 1.0000;
+			try
+			{
+				value = Convert.ToDouble(dgv[1, e.RowIndex].Value);
+				if (value < 0)
+					throw new InvalidOperationException("Number should be bigger, than zero.");
+			}
+			catch (InvalidOperationException x)
+			{
+				MessageBox.Show(x.Message);
+				dgv[1, e.RowIndex].Value = DEFAULT;
+			}
+			catch
+			{
+				MessageBox.Show("Wrong data type.");
+				dgv[1, e.RowIndex].Value = DEFAULT;
+			}
+		}
+	}
 }

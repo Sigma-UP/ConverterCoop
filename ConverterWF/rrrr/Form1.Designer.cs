@@ -106,6 +106,8 @@
             this.dgv.Name = "dgv";
             this.dgv.Size = new System.Drawing.Size(481, 164);
             this.dgv.TabIndex = 35;
+            this.dgv.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CellValueChanged);
+            this.dgv.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dgv_KeyPress);
             // 
             // btn_screamer
             // 
