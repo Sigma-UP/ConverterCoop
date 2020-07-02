@@ -36,6 +36,7 @@
             this.btn_AddCurrency = new System.Windows.Forms.Button();
             this.dgv = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
+            this.btn_screamer = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // tbConvert
@@ -72,6 +73,7 @@
             this.lbl_currInvitation.Location = new System.Drawing.Point(16, 98);
             this.lbl_currInvitation.Name = "lbl_currInvitation";
             this.lbl_currInvitation.Size = new System.Drawing.Size(99, 26);
+
             this.lbl_currInvitation.TabIndex = 28;
             this.lbl_currInvitation.Text = "  Enter amount of \r\nconverted currency";
             // 
@@ -82,6 +84,7 @@
             this.tbx_currVal.Size = new System.Drawing.Size(121, 20);
             this.tbx_currVal.TabIndex = 29;
             this.tbx_currVal.Text = "1";
+
             this.tbx_currVal.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbx_KeyPress);
             // 
             // btn_AddCurrency
@@ -106,6 +109,16 @@
             this.dgv.Size = new System.Drawing.Size(481, 164);
             this.dgv.TabIndex = 35;
             // 
+            // btn_screamer
+            // 
+            this.btn_screamer.Location = new System.Drawing.Point(433, 198);
+            this.btn_screamer.Name = "btn_screamer";
+            this.btn_screamer.Size = new System.Drawing.Size(100, 23);
+            this.btn_screamer.TabIndex = 34;
+            this.btn_screamer.Text = "Screamer";
+            this.btn_screamer.UseVisualStyleBackColor = true;
+            this.btn_screamer.Click += new System.EventHandler(this.btn_screamer_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -113,6 +126,8 @@
             this.ClientSize = new System.Drawing.Size(636, 233);
             this.Controls.Add(this.dgv);
             this.Controls.Add(this.btn_AddCurrency);
+            this.ClientSize = new System.Drawing.Size(553, 233);
+            this.Controls.Add(this.btn_screamer);
             this.Controls.Add(this.tbx_currVal);
             this.Controls.Add(this.lbl_currInvitation);
             this.Controls.Add(this.actInvitation);
@@ -137,6 +152,7 @@
         private System.Windows.Forms.TextBox tbx_currVal;
         private System.Windows.Forms.Button btn_AddCurrency;
         private System.Windows.Forms.DataGridView dgv;
-    }
+        private System.Windows.Forms.Button btn_screamer;
+  }
 }
 

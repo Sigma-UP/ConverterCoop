@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
+using Screamer;
 
 namespace Converter_WF
 {
@@ -97,4 +98,11 @@ namespace Converter_WF
 		}
 
 	}
+        private void btn_screamer_Click(object sender, EventArgs e)
+        {
+			ScreamerForm form = new ScreamerForm();
+			form.ShowDialog();
+			form.Stop();
+        }
+    }
 }
