@@ -3,14 +3,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Forms.VisualStyles;
+using System.IO;
 using Screamer;
 
 namespace Converter_WF
@@ -19,23 +14,14 @@ namespace Converter_WF
 	{
 		int chsnIndex;  // currency index for conversion
 		string current; // current currency name to convert
-		
-		private List<string> currencies = new List<string> { 
-			"USD", "EUR", "UAH", 
-			"PLN", "BYR", "CNY", 
-			"RUB" };
-		
+		const string databasePath = "database.txt";
+
+		private List<string> currencies = new List<string>();
 
 		public Form1()
 		{
 			InitializeComponent();
 
-			object[] arr = new object[currencies.Count()];
-			for(int i = 0; i < currencies.Count(); i++)
-				arr[i] = currencies[i];
-			cbFrom.Items.AddRange(arr);
-
-			
 			dgv.Columns.Add("currencyName", "CURRENCY");
 			dgv.Columns[0].ReadOnly = true;
 
@@ -44,35 +30,48 @@ namespace Converter_WF
 
 			dgv.Columns.Add("result", "RESULT");
 			dgv.Columns[2].ReadOnly = true;
-		
-			for (int i = 0; i < currencies.Count() - 1; i++)
-				dgv.Rows.Add();
-
-			cbFrom.SelectedIndex = 0;
 		}
 
 		private void Form1_Load(object sender, EventArgs e)
 		{
+			if (LoadDataBase(databasePath))
+				return;
+
+			MessageBox.Show
+				(
+				"Failed to read the database. Default currencies will be loaded", 
+				"Error", 
+				MessageBoxButtons.OK
+				);
+
+			string[] defCrncs = new string[] { "USD", "EUR", "UAH", "PLN", "BYR", "CNY", "RUB" };
+			foreach (string crnc in defCrncs)
+				AddCrnc(crnc);
 		}
 
 		private void cbFrom_SelectedIndexChanged(object sender, EventArgs e)
 		{
+			if (cbFrom.SelectedIndex == -1)
+				return;
+
 			chsnIndex = cbFrom.SelectedIndex;
 			current = currencies[chsnIndex];
 
 			swap_last(currencies, chsnIndex);
 
-			lbl_currInvitation.Text = $"Enter amount of {current}";
+			lbl_currInvitation.Text = $"Enter amount of {current}:";
 			
 
 			for (int i = 0; i < currencies.Count() - 1; i++)
 			{
 				dgv.Rows[i].Cells["currencyName"].Value = currencies[i];
-				dgv.Rows[i].Cells["rare"].Value = "1,0000";
-				dgv.Rows[i].Cells["result"].Value = "1,0000";
+				dgv.Rows[i].Cells["rare"].Value = "0,0000";
+				dgv.Rows[i].Cells["result"].Value = "0,0000";
 			}
 
 			swap_last(currencies, chsnIndex);
+			if (dgv.Rows.Count == currencies.Count) 
+				dgv.Rows.Remove(dgv.Rows[currencies.Count - 1]);
 		}
 		private void tbx_KeyPress(object sender, KeyPressEventArgs e) {positive_num_check(e); }
 		private void dgv_KeyPress(object sender, KeyPressEventArgs e) {positive_num_check(e); }
@@ -110,24 +109,116 @@ namespace Converter_WF
 
 		private void dgv_CellValueChanged(object sender, DataGridViewCellEventArgs e)
 		{
-			double value;
-			double DEFAULT = 1.0000;
+			double value = 0;
+			bool isOk = true;
+
 			try
 			{
 				value = Convert.ToDouble(dgv[1, e.RowIndex].Value);
-				if (value < 0)
-					throw new InvalidOperationException("Number should be bigger, than zero.");
-			}
-			catch (InvalidOperationException x)
-			{
-				MessageBox.Show(x.Message);
-				dgv[1, e.RowIndex].Value = DEFAULT;
 			}
 			catch
 			{
+				isOk = false;
+			}
+
+			if (!isOk || value < 0)
+            {
 				MessageBox.Show("Wrong data type.");
-				dgv[1, e.RowIndex].Value = DEFAULT;
+				dgv[1, e.RowIndex].Value = 0;
+			}
+			else
+            {
+				ConvertRow(e.RowIndex);
+            }
+
+		}
+
+		void ConvertRow(int rowId)
+        {
+			double srcCrncValue = double.Parse(tbx_currVal.Text);
+			double crncRate = Convert.ToDouble(dgv.Rows[rowId].Cells["RARE"].Value);
+
+			dgv.Rows[rowId].Cells["result"].Value = (srcCrncValue * crncRate).ToString("0.0000");
+		}
+
+		void AddCrnc(string name)
+		{
+			currencies.Add(name);
+			cbFrom.Items.Add(name);
+			dgv.Rows.Add();
+
+			for (int i = 0; i < dgv.Rows.Count; i++) 
+			{
+				dgv.Rows[i].Cells["currencyName"].Value = currencies[i];
+				dgv.Rows[i].Cells["rare"].Value = "0,0000";
+				dgv.Rows[i].Cells["result"].Value = "0,0000";
 			}
 		}
-	}
+
+		private bool LoadDataBase(string path)
+		{
+			StreamReader sr;
+			
+			try
+			{
+				sr = new StreamReader(path);
+			}
+			catch
+			{
+				return false;
+			}
+
+			string line;
+			while ((line = sr.ReadLine()) != null)
+				if (line.Length == 3)
+					AddCrnc(line);
+
+			sr.Close();
+			return true;
+		}
+
+		private void SaveDataBase(string path)
+		{
+			StreamWriter sw;
+
+			try
+			{
+				sw = new StreamWriter(path);
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("DataBase write error: " + ex.Message, "Error", MessageBoxButtons.OK);
+				return;
+			}
+
+			foreach (string item in currencies)
+				sw.WriteLine(item);
+
+			sw.Close();
+		}
+
+		private void btn_AddCurrency_Click(object sender, EventArgs e)
+        {
+			AddCrncForm addCrncForm = new AddCrncForm();
+			addCrncForm.ShowDialog();
+
+			if (addCrncForm.DialogResult == DialogResult.OK)
+				if (!currencies.Contains(addCrncForm.crncName))
+					AddCrnc(addCrncForm.crncName);
+				else
+					MessageBox.Show("Such currency has already been added", "Error", MessageBoxButtons.OK);
+
+			SaveDataBase(databasePath);
+		}
+
+        private void tbx_currVal_TextChanged(object sender, EventArgs e)
+        {
+			double srcCrncValue;
+			if (!double.TryParse(tbx_currVal.Text, out srcCrncValue))  
+				return;
+
+			for (int i = 0; i < dgv.RowCount; i++)
+				ConvertRow(i);
+		}
+    }
 }
