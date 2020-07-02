@@ -79,5 +79,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Screamer\Screamer.csproj">
+      <Project>{9f71df89-d4fa-45ec-b3dc-cc20ef93fec4}</Project>
+      <Name>Screamer</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

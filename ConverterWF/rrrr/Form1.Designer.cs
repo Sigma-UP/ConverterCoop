@@ -61,6 +61,7 @@
             this.lbl_convDescription = new System.Windows.Forms.Label();
             this.tbx_rareDFLT = new System.Windows.Forms.TextBox();
             this.tbx_result0 = new System.Windows.Forms.TextBox();
+            this.btn_screamer = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // tbConvert
@@ -153,29 +154,13 @@
             this.tb_convTo1.TabIndex = 9;
             this.tb_convTo1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbx_KeyPress);
             // 
-            // tb_convTo2
+            // tb_convTo6
             // 
-            this.tb_convTo2.Location = new System.Drawing.Point(228, 62);
-            this.tb_convTo2.Name = "tb_convTo2";
-            this.tb_convTo2.Size = new System.Drawing.Size(100, 20);
-            this.tb_convTo2.TabIndex = 14;
-            this.tb_convTo2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbx_KeyPress);
-            // 
-            // tb_convTo3
-            // 
-            this.tb_convTo3.Location = new System.Drawing.Point(228, 88);
-            this.tb_convTo3.Name = "tb_convTo3";
-            this.tb_convTo3.Size = new System.Drawing.Size(100, 20);
-            this.tb_convTo3.TabIndex = 13;
-            this.tb_convTo3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbx_KeyPress);
-            // 
-            // tb_convTo4
-            // 
-            this.tb_convTo4.Location = new System.Drawing.Point(228, 114);
-            this.tb_convTo4.Name = "tb_convTo4";
-            this.tb_convTo4.Size = new System.Drawing.Size(100, 20);
-            this.tb_convTo4.TabIndex = 12;
-            this.tb_convTo4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbx_KeyPress);
+            this.tb_convTo6.Location = new System.Drawing.Point(228, 166);
+            this.tb_convTo6.Name = "tb_convTo6";
+            this.tb_convTo6.Size = new System.Drawing.Size(100, 20);
+            this.tb_convTo6.TabIndex = 10;
+            this.tb_convTo6.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbx_KeyPress);
             // 
             // tb_convTo5
             // 
@@ -185,17 +170,29 @@
             this.tb_convTo5.TabIndex = 11;
             this.tb_convTo5.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbx_KeyPress);
             // 
-            // tb_convTo6
+            // tb_convTo4
             // 
-            this.tb_convTo6.Location = new System.Drawing.Point(228, 166);
-            this.tb_convTo6.Name = "tb_convTo6";
-            this.tb_convTo6.Size = new System.Drawing.Size(100, 20);
-            this.tb_convTo6.TabIndex = 10;
-            this.tb_convTo6.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbx_KeyPress);
-
-
-
-
+            this.tb_convTo4.Location = new System.Drawing.Point(228, 114);
+            this.tb_convTo4.Name = "tb_convTo4";
+            this.tb_convTo4.Size = new System.Drawing.Size(100, 20);
+            this.tb_convTo4.TabIndex = 12;
+            this.tb_convTo4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbx_KeyPress);
+            // 
+            // tb_convTo3
+            // 
+            this.tb_convTo3.Location = new System.Drawing.Point(228, 88);
+            this.tb_convTo3.Name = "tb_convTo3";
+            this.tb_convTo3.Size = new System.Drawing.Size(100, 20);
+            this.tb_convTo3.TabIndex = 13;
+            this.tb_convTo3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbx_KeyPress);
+            // 
+            // tb_convTo2
+            // 
+            this.tb_convTo2.Location = new System.Drawing.Point(228, 62);
+            this.tb_convTo2.Name = "tb_convTo2";
+            this.tb_convTo2.Size = new System.Drawing.Size(100, 20);
+            this.tb_convTo2.TabIndex = 14;
+            this.tb_convTo2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbx_KeyPress);
             // 
             // lbl_result1
             // 
@@ -299,11 +296,11 @@
             this.lbl_result6.TabIndex = 25;
             this.lbl_result6.Text = "label6";
             // 
-            // currInvitation
+            // lbl_currInvitation
             // 
             this.lbl_currInvitation.AutoSize = true;
             this.lbl_currInvitation.Location = new System.Drawing.Point(12, 98);
-            this.lbl_currInvitation.Name = "currInvitation";
+            this.lbl_currInvitation.Name = "lbl_currInvitation";
             this.lbl_currInvitation.Size = new System.Drawing.Size(35, 13);
             this.lbl_currInvitation.TabIndex = 28;
             this.lbl_currInvitation.Text = "label1";
@@ -314,9 +311,9 @@
             this.tbx_currVal.Name = "tbx_currVal";
             this.tbx_currVal.Size = new System.Drawing.Size(100, 20);
             this.tbx_currVal.TabIndex = 29;
+            this.tbx_currVal.Text = "1";
             this.tbx_currVal.TextChanged += new System.EventHandler(this.tbx_currVal_TextChanged);
             this.tbx_currVal.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbx_KeyPress);
-            this.tbx_currVal.Text = "1";
             // 
             // lbl_rareDescription
             // 
@@ -353,11 +350,22 @@
             this.tbx_result0.Size = new System.Drawing.Size(100, 20);
             this.tbx_result0.TabIndex = 33;
             // 
+            // btn_screamer
+            // 
+            this.btn_screamer.Location = new System.Drawing.Point(433, 198);
+            this.btn_screamer.Name = "btn_screamer";
+            this.btn_screamer.Size = new System.Drawing.Size(100, 23);
+            this.btn_screamer.TabIndex = 34;
+            this.btn_screamer.Text = "Screamer";
+            this.btn_screamer.UseVisualStyleBackColor = true;
+            this.btn_screamer.Click += new System.EventHandler(this.btn_screamer_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(553, 233);
+            this.Controls.Add(this.btn_screamer);
             this.Controls.Add(this.tbx_result0);
             this.Controls.Add(this.tbx_rareDFLT);
             this.Controls.Add(this.lbl_convDescription);
@@ -435,6 +443,7 @@
         private System.Windows.Forms.Label lbl_convDescription;
         private System.Windows.Forms.TextBox tbx_rareDFLT;
         private System.Windows.Forms.TextBox tbx_result0;
+        private System.Windows.Forms.Button btn_screamer;
     }
 }
 
