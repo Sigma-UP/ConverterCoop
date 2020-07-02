@@ -23,16 +23,25 @@ namespace Converter_WF
 
             tBox_crncName.SelectionStart = tBox_crncName.Text.Length;
             tBox_crncName.SelectionLength = 0;
+            
         }
 
         private void btn_ok_Click(object sender, EventArgs e)
         {
+            string a = tBox_crncName.Text;
+
+            for (int i = 0; i < 3; i++)
+                if (!Char.IsLetterOrDigit(a[i]))
+                {
+                    MessageBox.Show("Invalid Currency Code", "Error", MessageBoxButtons.OK);
+                    return;
+                }    
             if (tBox_crncName.Text.Length != 3)
             {
+
                 MessageBox.Show("Invalid Currency Code", "Error", MessageBoxButtons.OK);
                 return;
             }
-
             DialogResult = DialogResult.OK;
         }
 

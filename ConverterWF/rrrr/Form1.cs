@@ -26,7 +26,7 @@ namespace Converter_WF
 			dgv.Columns[0].ReadOnly = true;
 
 			dgv.Columns.Add("rare", "RARE");
-			dgv.Columns[1].ReadOnly = false;
+			dgv.Columns[1].ReadOnly = true;
 
 			dgv.Columns.Add("result", "RESULT");
 			dgv.Columns[2].ReadOnly = true;
@@ -51,6 +51,9 @@ namespace Converter_WF
 
 		private void cbFrom_SelectedIndexChanged(object sender, EventArgs e)
 		{
+			dgv.Columns[1].ReadOnly = false;
+				
+
 			if (cbFrom.SelectedIndex == -1)
 				return;
 
@@ -69,19 +72,12 @@ namespace Converter_WF
 				dgv.Rows[i].Cells["result"].Value = "0,0000";
 			}
 
-			swap_last(currencies, chsnIndex);
 			if (dgv.Rows.Count == currencies.Count) 
 				dgv.Rows.Remove(dgv.Rows[currencies.Count - 1]);
+			swap_last(currencies, chsnIndex);
 		}
 		private void tbx_KeyPress(object sender, KeyPressEventArgs e) {positive_num_check(e); }
-		private void dgv_KeyPress(object sender, KeyPressEventArgs e) {positive_num_check(e); }
 		
-		private void btn_convert_click(object sender, EventArgs e)
-		{
-			for (int i = 0; i < dgv.RowCount; i++)
-				dgv.Rows[i].Cells["result"].Value =
-					(Convert.ToDouble(tbx_currVal.Text) * Convert.ToDouble(dgv.Rows[i].Cells["RARE"].Value)).ToString("0.0000");
-		}
 
 		private void swap_last(List<string> list, int swap_index)
 		{
@@ -206,7 +202,7 @@ namespace Converter_WF
 				if (!currencies.Contains(addCrncForm.crncName))
 					AddCrnc(addCrncForm.crncName);
 				else
-					MessageBox.Show("Such currency has already been added", "Error", MessageBoxButtons.OK);
+					MessageBox.Show("Same currency has already been added", "Error", MessageBoxButtons.OK);
 
 			SaveDataBase(databasePath);
 		}
