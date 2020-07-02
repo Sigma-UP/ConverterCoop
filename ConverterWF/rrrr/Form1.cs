@@ -97,7 +97,7 @@ namespace Converter_WF
 			return e;
 		}
 
-	}
+	
         private void btn_screamer_Click(object sender, EventArgs e)
         {
 			ScreamerForm form = new ScreamerForm();
