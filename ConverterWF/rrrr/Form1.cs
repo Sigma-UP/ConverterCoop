@@ -78,14 +78,12 @@ namespace Converter_WF
 		}
 		private void tbx_KeyPress(object sender, KeyPressEventArgs e) {positive_num_check(e); }
 		
-
 		private void swap_last(List<string> list, int swap_index)
 		{
 			string tmp = list[list.Count() - 1];
 			list[list.Count() - 1] = list[swap_index];
 			list[swap_index] = tmp;
 		}
-
 	
 		private KeyPressEventArgs positive_num_check(KeyPressEventArgs e)
 		{
@@ -94,7 +92,6 @@ namespace Converter_WF
 				e.Handled = true;
 			return e;
 		}
-
 	
         private void btn_screamer_Click(object sender, EventArgs e)
         {

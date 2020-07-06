@@ -1,0 +1,8 @@
+USD
+EUR
+UAH
+PLN
+BYR
+CNY
+RUB
+RFR
